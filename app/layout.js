@@ -1,18 +1,16 @@
-import "./globals.css";
-
+import './globals.css'
 
 export const metadata = {
-  title: "dogmatch",
-  description: "Matched with dog breed",
-};
+  title: 'PawMatch - Find Your Perfect Dog Breed',
+  description: 'Discover the perfect dog breed that matches your lifestyle and personality',
+}
 
-export default function App({ Component, pageProps }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-
-        <Component {...pageProps} />
-
-
+      <body className="antialiased">
+        {children}
+      </body>
     </html>
-  );
+  )
 }

@@ -1,7 +1,6 @@
-"use client";
+'use client'
 
 import { useState } from 'react'
-import Head from 'next/head'
 import BreedCard from './components/BreedCard'
 import PersonalityQuiz from './components/PersonalityQuiz'
 import { dogBreeds } from './data/DogBreeds'
@@ -59,11 +58,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <Head>
-        <title>PawMatch - Find Your Perfect Dog Breed</title>
-        <meta name="description" content="Discover the perfect dog breed that matches your lifestyle and personality" />
-      </Head>
-
       {/* Header */}
       <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,6 +72,7 @@ export default function Home() {
             >
               Find My Match
             </button>
+
           </div>
         </div>
       </header>
@@ -87,7 +82,7 @@ export default function Home() {
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-gray-800 mb-6">
             Find Your Perfect
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600"> Furry Friend</span>
+            <span className="bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600"> Furry Friend</span>
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Discover the dog breed that perfectly matches your lifestyle, personality, and living situation with our intelligent matching system.

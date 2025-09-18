@@ -1,8 +1,19 @@
-import { useState } from 'react'
+'use client'
+
+import { useState, useEffect } from 'react'
 
 export default function PersonalityQuiz({ onComplete, onClose }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState({})
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true)
+    document.body.style.overflow ='hidden'
+    return () => {
+      document.body.style.overflow ='unset'
+    }
+  }, [])
 
   const questions = [
     {
@@ -78,16 +89,31 @@ export default function PersonalityQuiz({ onComplete, onClose }) {
     }
   }
 
+  const handleClose =() => {
+    document.body.style.overflow = 'unset'
+    onClose()
+  }
+
   const progress = ((currentQuestion + 1) / questions.length) * 100
 
+  if (!isClient) return null
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          handleClose()
+        }
+      }}
+    >
+      <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative animate-in fade-in-0 zoom-in-95 duration-300">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">Find Your Match</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Find Your Match</h2>
           <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 text-2xl"
+            onClick={handleClose}
+            className="text-gray-500 hover:text-gray-700 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+            type="button"
           >
             ✕
           </button>
@@ -101,37 +127,47 @@ export default function PersonalityQuiz({ onComplete, onClose }) {
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
             <div
-              className="bg-gradient-to-r from-purple-600 to-blue-600 h-3 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 h-3 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
         <div className="mb-8">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6">
             {questions[currentQuestion].question}
           </h3>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {questions[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswer(option.value)}
-                className="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:bg-purple-50 transition-all duration-300"
+                className="w-full text-left p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:bg-purple-50 transition-all duration-300 focus:outline-none focus:border-purple-500 focus:bg-purple-50"
+                type="button"
               >
-                {option.label}
+                <span className="text-sm sm:text-base">{option.label}</span>
               </button>
             ))}
           </div>
         </div>
 
-        {currentQuestion > 0 && (
-          <button
-            onClick={goBack}
-            className="bg-gray-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-600 transition-colors duration-300"
-          >
-            Previous Question
-          </button>
-        )}
+        <div className="flex justify-between items-center">
+          {currentQuestion > 0 ? (
+            <button
+              onClick={goBack}
+              className="bg-gray-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-600 transition-colors duration-300 text-sm sm:text-base"
+              type="button"
+            >
+              Previous Question
+            </button>
+          ) : (
+            <div></div>
+          )}
+
+          <div className="text-sm text-gray-500">
+            Click outside to close
+          </div>
+        </div>
       </div>
     </div>
   )

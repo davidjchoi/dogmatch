@@ -1,5 +1,6 @@
+'use client'
+
 import { useState } from 'react'
-import Image from 'next/image'
 
 export default function BreedCard({ breed, isMatch = false }) {
   const [showDetails, setShowDetails] = useState(false)
@@ -32,7 +33,7 @@ export default function BreedCard({ breed, isMatch = false }) {
       )}
 
       <div className="relative">
-        <Image
+        <img
           src={breed.image}
           alt={breed.name}
           className="w-full h-48 object-cover"
