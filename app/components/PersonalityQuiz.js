@@ -100,14 +100,14 @@ export default function PersonalityQuiz({ onComplete, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-300"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           handleClose()
         }
       }}
     >
-      <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative animate-in fade-in-0 zoom-in-95 duration-300">
+      <div className="bg-white rounded-3xl p-6 sm:p-10 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-500">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Find Your Match</h2>
           <button
@@ -120,16 +120,17 @@ export default function PersonalityQuiz({ onComplete, onClose }) {
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-8">
-          <div className="flex justify-between text-sm text-gray-600 mb-2">
+        <div className="mb-10">
+          <div className="flex justify-between text-sm font-semibold text-gray-600 mb-3">
             <span>Question {currentQuestion + 1} of {questions.length}</span>
-            <span>{Math.round(progress)}% Complete</span>
+            <span className="text-purple-600">{Math.round(progress)}%</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-3">
+          <div className="relative w-full bg-gray-200 rounded-full h-4 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-purple-600 to-blue-600 h-3 rounded-full transition-all duration-500 ease-out"
+              className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 transition-all duration-700 ease-out rounded-full shadow-lg shadow-purple-500/50"
               style={{ width: `${progress}%` }}
             />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
           </div>
         </div>
 
