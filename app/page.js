@@ -1,21 +1,25 @@
 'use client'
 
+import './globals.css'
 import { useState, useEffect } from 'react'
 import BreedCard from './components/BreedCard'
 import PersonalityQuiz from './components/PersonalityQuiz'
-import { dogBreeds } from './data/DogBreeds'
+import { Breeds } from './data/DogBreeds'
+import Link from 'next/link'
+// import { About } from './components/About'
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false)
   const [matchedBreeds, setMatchedBreeds] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [mounted, setMounted] = useState(false)
+  const [showAbout, setShowAbout] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const filteredBreeds = dogBreeds.filter(breed =>
+  const filteredBreeds = Breeds.filter(breed =>
     breed.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     breed.group.toLowerCase().includes(searchTerm.toLowerCase())
   )
@@ -31,7 +35,7 @@ export default function Home() {
   }
 
   const calculateMatches = (answers) => {
-    return dogBreeds.map(breed => {
+    return Breeds.map(breed => {
       let score = 0
       let maxScore = 0
 
@@ -76,36 +80,46 @@ export default function Home() {
 
     {/* Header */}
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-white/20 shadow-lg shadow-purple-500/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4 sm:py-6">
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-30"></div>
-              <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 p-2 sm:p-3 rounded-2xl text-white text-2xl sm:text-3xl">
-                🐕
-              </div>
-            </div>
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
-                PawMatch
-              </h1>
-              <p className="text-xs text-gray-500 hidden sm:block">AI-Powered Breed Matching</p>
-            </div>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-between items-center py-4 sm:py-6">
+      <div className="flex items-center space-x-3 sm:space-x-4">
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-30"></div>
+          <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 p-2 sm:p-3 rounded-2xl text-white text-2xl sm:text-3xl">
+            🐕
           </div>
-          <button
-            onClick={() => setShowQuiz(true)}
-            className="group relative px-4 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50"
-            type="button"
-          >
-            <span className="relative z-10 text-sm sm:text-base flex items-center gap-2">
-              <span className="hidden sm:inline">✨</span>
-              Find My Match
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </button>
+        </div>
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
+            PawMatch
+          </h1>
+          <p className="text-xs text-blue-500 hidden sm:block">AI-Powered Breed Matching</p>
         </div>
       </div>
-    </header>
+
+      {/* Navigation */}
+      <div className="flex items-center gap-4">
+        <Link
+          href="/about"
+          className="hidden sm:block text-gray-700 hover:text-purple-600 font-semibold transition-colors duration-300"
+        >
+          About
+        </Link>
+        <button
+          onClick={() => setShowQuiz(true)}
+          className="group relative px-4 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50"
+          type="button"
+        >
+          <span className="relative z-10 text-sm sm:text-base flex items-center gap-2">
+            <span className="hidden sm:inline">✨</span>
+            Find My Match
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
 
     <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
       {/* Hero Section */}
@@ -211,6 +225,7 @@ export default function Home() {
         onClose={() => setShowQuiz(false)}
       />
     )}
+
   </div>
 )
 }

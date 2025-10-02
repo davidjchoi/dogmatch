@@ -1,9 +1,35 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function BreedCard({ breed, isMatch = false }) {
   const [showDetails, setShowDetails] = useState(false)
+  const [imageUrl, setImageUrl] = useState(null);
+  const [imageLoading, setImageLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDogImage = async () => {
+      try {
+        setImageLoading(true);
+        const response = await fetch(`https://dog.ceo/api/breed/${breed.apiBreed}/images/random/1`);
+        const data = await response.json();
+
+        if (data.status === 'success') {
+          setImageUrl(data.message);
+        }
+      }
+      catch (error) {
+        console.error('Error fetching dog image:', error)
+        setImageUrl('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=300&fit=crop'); // Fallback image
+      }
+      finally {
+        setImageLoading(false);
+      }
+    }
+    if (breed.apiBreed) {
+      fetchDogImage();
+    }
+  }, [breed.apiBreed]);
 
   const ActivityBars = ({ level, label }) => (
     <div className="mb-4">
@@ -47,12 +73,21 @@ export default function BreedCard({ breed, isMatch = false }) {
           </div>
         )}
 
-        <div className="relative overflow-hidden">
-          <img
-            src={breed.image}
-            alt={breed.name}
-            className="w-full h-56 sm:h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-          />
+<div className="relative overflow-hidden">
+          {imageLoading ? (
+            <div className="w-full h-56 sm:h-64 bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            </div>
+          ) : (
+            <img
+              src={imageUrl}
+              alt={breed.name}
+              className="w-full h-56 sm:h-64 object-contain transition-transform duration-700 group-hover:scale-110"
+              onError={(e) => {
+                e.target.src = 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=300&fit=crop'
+              }}
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <div className="absolute top-4 right-4">
             <div className="backdrop-blur-xl bg-white/90 rounded-2xl px-4 py-2 text-sm font-bold text-gray-800 shadow-xl border border-white/40">
