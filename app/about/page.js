@@ -16,6 +16,7 @@ export default function About() {
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-white/20 shadow-lg shadow-purple-500/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4 sm:py-6">
+
             <Link href="/" className="flex items-center space-x-3 sm:space-x-4 group">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
@@ -30,6 +31,19 @@ export default function About() {
                 <p className="text-xs text-blue-500 hidden sm:block">AI-Powered Breed Matching</p>
               </div>
             </Link>
+
+      {/* Navigation bar */}
+            <div className = "flex items-center gap-4">
+            <Link
+          href="/about"
+          className="hidden sm:block text-gray-700 hover:text-purple-600 font-semibold transition-colors duration-300"
+        >
+          About
+        </Link>
+        <Link href='/contact' className= "hidden sm:block text-gray-700 hover:text-purple-600 font-semibold transition-colors duration-300">
+        Contact</Link>
+        <Link href='blog' className= "hidden sm:block text-gray-700 hover:text-purple-600 font-semibold transition-colors duration-300">
+        Blog</Link>
             <Link
               href="/"
               className="group relative px-4 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50"
@@ -40,6 +54,7 @@ export default function About() {
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
+            </div>
           </div>
         </div>
       </header>

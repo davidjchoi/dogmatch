@@ -6,14 +6,14 @@ import BreedCard from './components/BreedCard'
 import PersonalityQuiz from './components/PersonalityQuiz'
 import { Breeds } from './data/DogBreeds'
 import Link from 'next/link'
-// import { About } from './components/About'
+
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false)
   const [matchedBreeds, setMatchedBreeds] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [mounted, setMounted] = useState(false)
-  const [showAbout, setShowAbout] = useState(false)
+
 
   useEffect(() => {
     setMounted(true)
@@ -89,12 +89,12 @@ export default function Home() {
             🐕
           </div>
         </div>
-        <div>
+        <Link href='/'>
           <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
             PawMatch
           </h1>
           <p className="text-xs text-blue-500 hidden sm:block">AI-Powered Breed Matching</p>
-        </div>
+        </Link>
       </div>
 
       {/* Navigation */}
@@ -105,6 +105,11 @@ export default function Home() {
         >
           About
         </Link>
+        <Link href='/contact' className= "hidden sm:block text-gray-700 hover:text-purple-600 font-semibold transition-colors duration-300">
+        Contact</Link>
+        <Link href='blog' className= "hidden sm:block text-gray-700 hover:text-purple-600 font-semibold transition-colors duration-300">
+        Blog</Link>
+
         <button
           onClick={() => setShowQuiz(true)}
           className="group relative px-4 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50"

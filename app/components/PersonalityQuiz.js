@@ -69,6 +69,68 @@ export default function PersonalityQuiz({ onComplete, onClose }) {
         { value: 4, label: 'High - frequent professional grooming' },
         { value: 5, label: 'Maximum - daily grooming routine' }
       ]
+    },
+    {
+      id: 'allergies',
+      question: 'Do you have any allergies to dogs?',
+      options: [
+        { value: 1, label: 'Yes, severe allergies' },
+        { value: 2, label: 'Yes, mild allergies' },
+        { value: 3, label: 'No allergies' }
+      ]
+    },
+    { id:'children',
+      question: 'Do you have children?',
+      options: [
+        { value: 1, label: 'No children' },
+        { value: 2, label: 'Young children (under 5)' },
+        { value: 3, label: 'Older children (5-12)' },
+        { value: 4, label: 'Teenagers (13-18)' }
+      ]
+    },
+    {id:'otherPets',
+      question: 'do you have other pets?',
+      options: [
+        { value: 1, label: 'No other pets' },
+        { value: 2, label: 'Cats' },
+        { value: 3, label: 'Small animals (rabbits, guinea pigs, etc.)' },
+        { value: 4, label: 'Other dogs' }
+      ]
+    },
+    {id: 'noiseTolerance',
+      question: 'What is your tolerance for noise?',
+      options: [
+        { value: 1, label: 'Low - prefer quiet environments' },
+        { value: 2, label: 'Moderate - can handle some noise' },
+        { value: 3, label: 'High - comfortable with noise' }
+      ]
+    },
+    {id: 'climate',
+      question: 'What type of climate do you live in?',
+      options: [
+        { value: 1, label: 'Cold climate' },
+        { value: 2, label: 'Temperate climate' },
+        { value: 3, label: 'Hot climate' },
+        { value: 4, label: 'Varied climate' }
+      ]
+    },
+    {id:'budget',
+      question: 'What is your budget for dog care?',
+      options: [
+        { value: 1, label: 'Low - basic care' },
+        { value: 2, label: 'Moderate - regular vet visits and quality food' },
+        { value: 3, label: 'High - premium care and services' }
+      ]
+    },
+    {id:'reason',
+      question: 'What is your primary reason for getting a dog?',
+      options: [
+        { value: 1, label: 'Companionship' },
+        { value: 2, label: 'Exercise partner' },
+        { value: 3, label: 'Family pet' },
+        { value: 4, label: 'Protection' },
+        { value: 5, label: 'Other' }
+      ]
     }
   ]
 

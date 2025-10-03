@@ -15,7 +15,10 @@ export const Breeds = [
     description: "Friendly, intelligent, and devoted dogs that make excellent family pets.",
     temperament: ["Friendly", "Intelligent", "Devoted", "Patient"],
     healthConsiderations: ["Hip dysplasia", "Eye conditions", "Heart problems"],
-    idealFor: "Families with children, active individuals, first-time owners"
+    idealFor: "Families with children, active individuals, first-time owners",
+    shedding:"high",
+    children:true,
+    otherPet:'okay',
   },
   {
     id: 2,
